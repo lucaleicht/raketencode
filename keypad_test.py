@@ -1,3 +1,5 @@
+# Klappt nicht über Pi direkt. Vermutlich wegen 3.3 Volt. Deshalb wird Mciro Pro dazwischengeschaltet, der Tastendruck annimmt, zwischenspeichert und mit # absendet.
+
 
 from pad4pi import rpi_gpio
 import RPi.GPIO as GPIO
