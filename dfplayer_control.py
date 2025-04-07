@@ -2,7 +2,7 @@ import serial
 import time
 
 # Serieller Port über UART
-ser = serial.Serial("/dev/serial0", baudrate=9600, timeout=1)
+ser = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1)
 
 # Hilfsfunktion zum Senden von DFPlayer-Befehlen
 def send_command(cmd, param1=0, param2=0):
