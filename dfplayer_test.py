@@ -4,7 +4,7 @@ import serial
 import time
 
 # Öffne serielle Verbindung über ttyS0 (Mini-UART)
-ser = serial.Serial("/dev/serial0", baudrate=9600, timeout=1)
+ser = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1)
 
 # Befehl: MP3-Track Nr. 1 abspielen
 def play_track_1():
