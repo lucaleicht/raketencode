@@ -1,0 +1,45 @@
+# Arduino IDE auf Leonardo stellen wegen ATmega32u4
+# Micro Pro buffert die Tasten und sendet mit #
+
+#include <Keypad.h>
+
+// Keymap für 4x4 Matrix
+const byte ROWS = 4;
+const byte COLS = 4;
+
+char keys[ROWS][COLS] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+
+// GPIO-Pins am Pro Micro (anpassen bei Bedarf!)
+byte rowPins[ROWS] = {9, 8, 7, 6};  // R1 bis R4
+byte colPins[COLS] = {5, 4, 3, 2};  // C1 bis C4
+
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
+String inputBuffer = "";
+
+void setup() {
+  Serial.begin(9600);
+  inputBuffer.reserve(10);  // bis zu 10-stellige Codes puffern
+}
+
+void loop() {
+  char key = keypad.getKey();
+  
+  if (key) {
+    if (key == '#') {
+      // Code abschicken, wenn "#" gedrückt
+      Serial.println(inputBuffer);
+      inputBuffer = "";
+    } else if (key == '*') {
+      // Eingabe löschen
+      inputBuffer = "";
+    } else {
+      inputBuffer += key;
+    }
+  }
+}
