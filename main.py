@@ -25,22 +25,22 @@ def mission_loop(stdscr):
         name = station['name']
 
         # 1. Begrüßung oder Start
-        if station.get('track_welcome'):
+        if station.get('track_welcome') is not None:
             show_message(stdscr, f"Begrüßung: {name}", 2)
             play_track(station['track_welcome'])
 
         # 2. Aufgabenansage
-        if station.get('track_task'):
+        if station.get('track_task') is not None:
             show_message(stdscr, "Aufgabe:", 2)
             play_track(station['track_task'])
 
         # 3. Zielankündigung
-        if station.get('track_fly_to'):
+        if station.get('track_fly_to') is not None:
             play_track(station['track_fly_to'])
             show_message(stdscr, "Zielankündigung…", 2)
 
         # 4. Codeeingabe
-        if station.get('track_code_prompt'):
+        if station.get('track_code_prompt') is not None:
             play_track(station['track_code_prompt'])
             code = get_code()
             # Warten auf korrekten Code
@@ -51,17 +51,17 @@ def mission_loop(stdscr):
             play_track(20)  # allgemeine Bestätigung "Code korrekt"
 
         # 5. Abflug-Ansage + Animation
-        if station.get('track_launch'):
+        if station.get('track_launch') is not None:
             play_track(station['track_launch'])
             show_launch_animation(stdscr)
 
         # 6. Wegephase (Hinweis)
-        if station.get('track_fly_to'):
+        if station.get('track_fly_to') is not None:
             show_message(stdscr, "Folgt den Pfeilen zum nächsten Ziel…", 3)
 
     # 7. Abschluss
     end_station = stations[-1]
-    if end_station.get('track_end'):
+    if end_station.get('track_end') is not None:
         play_track(end_station['track_end'])
         show_message(stdscr, "Mission abgeschlossen!", 4)
 
